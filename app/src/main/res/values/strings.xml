@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TodoListApp</string>
+    <string name="add_task">Add Task</string>
+    <string name="judul_task">Judul task</string>
+    <string name="deskripsi_task">Deskripsi task</string>
+    <string name="due_date">due date</string>
+    <string name="due_date_again">Due date</string>
+    <string name="tambah_todo">Tambah Todo</string>
+    <string name="hapus_todo">Hapus Todo</string>
+    <string name="simpan_perubahan">Simpan Perubahan</string>
+    <string name="_24_09_2021">24/09/2021</string>
+</resources>
