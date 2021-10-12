@@ -14,7 +14,10 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE email = :email AND password = :password")
     LiveData<User> login(String email, String password);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Query("SELECT * FROM users WHERE email = :email")
+    LiveData<User> isAlreadyExist(String email);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     long register(User user);
 
 }

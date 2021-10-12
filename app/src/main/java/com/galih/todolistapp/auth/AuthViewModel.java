@@ -22,6 +22,10 @@ public class AuthViewModel extends ViewModel {
         taskRepository.register(new User(name, email, password));
     }
 
+    public LiveData<User> isAlreadyExist(String email) {
+        return taskRepository.isAlreadyExist(email);
+    }
+
     public void setLoggedIn(boolean isLoggedIn) {
         taskRepository.setLoggedIn(isLoggedIn);
     }

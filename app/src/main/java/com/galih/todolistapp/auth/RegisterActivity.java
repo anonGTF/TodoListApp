@@ -2,12 +2,15 @@ package com.galih.todolistapp.auth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.galih.todolistapp.data.model.User;
 import com.galih.todolistapp.databinding.ActivityRegisterBinding;
 import com.galih.todolistapp.task.TaskActivity;
 import com.galih.todolistapp.utils.Utils;
@@ -49,11 +52,29 @@ public class RegisterActivity extends AppCompatActivity {
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Utils.showMessage(this, "Nama, Email, dan Password harus diisi");
         } else {
-            viewModel.register(name, email, password);
-            Utils.showMessage(this,  "Akun " + name + " berhasil dibuat");
-            finish();
+            viewModel.isAlreadyExist(email).observe(this, observer);
         }
     }
+
+    private final Observer<User> observer = new Observer<User>() {
+
+        @Override
+        public void onChanged(User user) {
+            String name = binding.etName.getText().toString();
+            String email = binding.etEmail.getText().toString();
+            String password = binding.etPassword.getText().toString();
+
+            Log.d("coba", "onChanged: " + user);
+
+            if (user == null) {
+                viewModel.register(name, email, password);
+                Utils.showMessage(RegisterActivity.this,  "Akun " + name + " berhasil dibuat");
+                finish();
+            } else {
+                binding.etEmail.setError("User sudah memiliki akun");
+            }
+        }
+    };
 
     @NonNull
     private static AuthViewModel obtainViewModel(AppCompatActivity activity) {

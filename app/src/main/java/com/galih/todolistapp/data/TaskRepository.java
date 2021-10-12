@@ -52,6 +52,10 @@ public class TaskRepository {
         executorService.execute(() -> userDao.register(user));
     }
 
+    public LiveData<User> isAlreadyExist(String email) {
+        return userDao.isAlreadyExist(email);
+    }
+
     public boolean isLoggedIn() {
         return preference.loggedin();
     }
