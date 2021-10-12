@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.galih.todolistapp.auth.AuthViewModel;
 import com.galih.todolistapp.task.TaskViewModel;
 import com.galih.todolistapp.taskmanager.TaskManagerViewModel;
 
@@ -30,6 +31,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new TaskViewModel(mApplication);
         } else if (modelClass.isAssignableFrom(TaskManagerViewModel.class)) {
             return (T) new TaskManagerViewModel(mApplication);
+        } else if (modelClass.isAssignableFrom(AuthViewModel.class)) {
+            return (T) new AuthViewModel(mApplication);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

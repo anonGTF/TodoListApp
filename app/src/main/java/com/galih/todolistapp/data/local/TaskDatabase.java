@@ -7,15 +7,17 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.galih.todolistapp.data.model.Task;
+import com.galih.todolistapp.data.model.User;
 
 @Database(
-        entities = {Task.class},
+        entities = {Task.class, User.class},
         version = 1,
         exportSchema = false
 )
 public abstract class TaskDatabase extends RoomDatabase {
 
     public abstract TaskDao taskDao();
+    public abstract UserDao userDao();
 
     private static volatile TaskDatabase INSTANCE;
 

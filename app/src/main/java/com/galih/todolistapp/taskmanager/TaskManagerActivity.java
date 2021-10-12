@@ -47,7 +47,7 @@ public class TaskManagerActivity extends AppCompatActivity implements DatePicker
                 String desc = intent.getStringExtra("desc");
                 long dueDate = intent.getLongExtra("dueDate", 0);
                 boolean isCompleted = intent.getBooleanExtra("isCompleted", false);
-                task = new Task(id, title, desc, dueDate, isCompleted);
+                task = new Task(id, title, desc, dueDate, isCompleted, viewModel.getUserId());
                 populateData();
 
                 getSupportActionBar().setTitle("Edit Todo");
@@ -84,7 +84,7 @@ public class TaskManagerActivity extends AppCompatActivity implements DatePicker
             task.setDescription(desc);
             task.setDueDateMillis(dueDateMillis);
         } else {
-            task = new Task(title, desc, dueDateMillis);
+            task = new Task(title, desc, dueDateMillis, viewModel.getUserId());
         }
 
         viewModel.upsert(task);

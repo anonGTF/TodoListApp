@@ -9,4 +9,14 @@
     <string name="hapus_todo">Hapus Todo</string>
     <string name="simpan_perubahan">Simpan Perubahan</string>
     <string name="_24_09_2021">24/09/2021</string>
+    <string name="logout">logout</string>
+    <string name="berikut_adalah_daftar_todo_anda">Berikut adalah daftar Todo Anda</string>
+    <string name="halo_name">Halo, %1$s</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="belum_punya_akun_registrasi">Belum punya akun? Registrasi</string>
+    <string name="nama">Nama</string>
+    <string name="register">Register</string>
+    <string name="sudah_punya_akun_login">Sudah punya akun? Login</string>
 </resources>

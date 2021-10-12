@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import com.galih.todolistapp.data.TaskRepository;
 import com.galih.todolistapp.data.model.Task;
+import com.galih.todolistapp.data.model.UserWithTask;
 
 import java.util.List;
 
@@ -20,7 +21,21 @@ public class TaskViewModel extends ViewModel {
         taskRepository.updateCompleted(id, isCompleted);
     }
 
-    public LiveData<List<Task>> getAllTask() {
-        return taskRepository.getAllTask();
+    public LiveData<UserWithTask> getAllTask(int userId) {
+        return taskRepository.getAllTask(userId);
+    }
+
+    public int getUserId() {
+        return taskRepository.getUserId();
+    }
+
+    public String getUserName() {
+        return taskRepository.getUserName();
+    }
+
+    public void logout() {
+        taskRepository.setUserId(0);
+        taskRepository.setLoggedIn(false);
+        taskRepository.setUserName("");
     }
 }

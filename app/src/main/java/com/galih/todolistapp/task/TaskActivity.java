@@ -9,8 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+
+import com.galih.todolistapp.R;
+import com.galih.todolistapp.auth.LoginActivity;
 import com.galih.todolistapp.data.model.Task;
+import com.galih.todolistapp.data.model.UserWithTask;
 import com.galih.todolistapp.taskmanager.TaskManagerActivity;
 import com.galih.todolistapp.databinding.ActivityTaskBinding;
 import com.galih.todolistapp.utils.ViewModelFactory;
@@ -35,7 +42,10 @@ public class TaskActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("List Todo");
 
         viewModel = obtainViewModel(TaskActivity.this);
-        viewModel.getAllTask().observe(this, taskObserver);
+        viewModel.getAllTask(viewModel.getUserId()).observe(this, taskObserver);
+
+        String greeting = String.format(getResources().getString(R.string.halo_name), viewModel.getUserName());
+        binding.tvGreeting.setText(greeting);
 
         binding.fab.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), TaskManagerActivity.class);
@@ -50,17 +60,35 @@ public class TaskActivity extends AppCompatActivity {
         binding = null;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.mi_logout) {
+            viewModel.logout();
+            Intent intent = new Intent(TaskActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return true;
+    }
+
     @NonNull
     private static TaskViewModel obtainViewModel(AppCompatActivity activity) {
         ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
         return new ViewModelProvider(activity, factory).get(TaskViewModel.class);
     }
 
-    private final Observer<List<Task>> taskObserver = new Observer<List<Task>>() {
+    private final Observer<UserWithTask> taskObserver = new Observer<UserWithTask>() {
         @Override
-        public void onChanged(@Nullable List<Task> taskList) {
-            if (taskList != null) {
-                taskAdapter.setListTask(taskList);
+        public void onChanged(UserWithTask userWithTask) {
+            if (userWithTask.tasks != null) {
+                taskAdapter.setListTask(userWithTask.tasks);
             }
         }
     };

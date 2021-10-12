@@ -19,4 +19,8 @@ public class TaskManagerViewModel extends ViewModel {
     public void delete(Task task) {
         taskRepository.delete(task);
     }
+
+    public int getUserId() {
+        return taskRepository.getUserId();
+    }
 }

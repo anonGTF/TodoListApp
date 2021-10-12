@@ -6,14 +6,19 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
+
 import com.galih.todolistapp.data.model.Task;
+import com.galih.todolistapp.data.model.UserWithTask;
+
 import java.util.List;
 
 @Dao
 public interface TaskDao {
 
-    @Query("SELECT * FROM task ORDER BY dueDate DESC")
-    LiveData<List<Task>> getAllTasks();
+    @Transaction
+    @Query("SELECT * FROM users WHERE id = :userId")
+    LiveData<UserWithTask> getAllTasks(int userId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertTask(Task task);

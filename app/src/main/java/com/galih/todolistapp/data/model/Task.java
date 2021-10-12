@@ -24,20 +24,25 @@ public class Task {
     @ColumnInfo(name = "completed")
     private boolean isCompleted;
 
+    @ColumnInfo(name = "userId")
+    private int userId;
+
     @Ignore
-    public Task(int id, String title, String description, long dueDateMillis, boolean isCompleted) {
+    public Task(int id, String title, String description, long dueDateMillis, boolean isCompleted, int userId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dueDateMillis = dueDateMillis;
         this.isCompleted = isCompleted;
+        this.userId = userId;
     }
 
-    public Task(String title, String description, long dueDateMillis) {
+    public Task(String title, String description, long dueDateMillis, int userId) {
         this.title = title;
         this.description = description;
         this.dueDateMillis = dueDateMillis;
         this.isCompleted = false;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -78,5 +83,13 @@ public class Task {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

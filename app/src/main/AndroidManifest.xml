@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoListApp">
-        <activity android:name=".splash.SplashActivity" android:theme="@style/splashScreenStyle">
+        <activity android:name=".auth.RegisterActivity"></activity>
+        <activity android:name=".auth.LoginActivity" />
+        <activity
+            android:name=".splash.SplashActivity"
+            android:theme="@style/splashScreenStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".taskmanager.TaskManagerActivity" />
-        <activity android:name=".task.TaskActivity"/>
+        <activity android:name=".task.TaskActivity" />
     </application>
 
 </manifest>
